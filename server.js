@@ -12,6 +12,15 @@ const runServer = async () => {
 
     app.listen(PORT_SERVER, () => {
       console.log(`Server running. Listening on port: ${PORT_SERVER}`)
+      console.log(
+        `
+      This is a simple CRUD API application made with Express and documented with Swagger.
+
+      Docs available at http://localhost:${PORT_SERVER}/api-docs
+
+      API command list:
+      `
+      )
     })
   } catch (err) {
     console.error(`Server not running. Error message: ${err.message}`)
