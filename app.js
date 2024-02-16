@@ -1,8 +1,10 @@
 import express from 'express'
 import logger from 'morgan'
 import cors from 'cors'
+import { swagger } from './utils/swagger.js'
 
 const app = express()
+swagger(app)
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
