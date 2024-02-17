@@ -2,6 +2,7 @@ import express from 'express'
 import logger from 'morgan'
 import cors from 'cors'
 import { swagger } from './utils/swagger.js'
+import { apiErrorHandler } from './utils/errors/api-error-handler.js'
 
 import { router as authRouter } from './routes/api/auth.js'
 import { router as usersRouter } from './routes/api/user.js'
@@ -25,12 +26,6 @@ app.use('/api/recipes', recipesRouter)
 app.use('/api/ingredients', ingredientsRouter)
 app.use('/api/shopping-lists', shoppingListRouter)
 
-app.use((req, res) => {
-  res.status(404).json({ message: 'Not found1' })
-})
-
-app.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message })
-})
+app.use(apiErrorHandler)
 
 export { app }
