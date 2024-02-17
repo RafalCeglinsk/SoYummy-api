@@ -47,3 +47,10 @@ export const registerSchema = Joi.object({
     'string.pattern.base': 'Email format is: example@example.com',
   }),
 })
+
+export const loginSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required().messages({
+    'string.pattern.base': 'Email format is: example@example.com',
+  }),
+  password: Joi.string().min(3).required(),
+})

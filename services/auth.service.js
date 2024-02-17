@@ -2,6 +2,7 @@ import { User } from '../schemas/user.schema.js'
 import bcrypt from 'bcryptjs'
 import gravatar from 'gravatar'
 import { nanoid } from 'nanoid'
+import jwt from 'jsonwebtoken'
 
 // Register user
 export const registerUser = async (data) => {
@@ -15,7 +16,7 @@ export const registerUser = async (data) => {
   //find an existing user
   const checkUser = await User.findOne({ email })
   if (checkUser) {
-    return {message: 'User already registered'}
+    return { message: 'User already registered' }
   }
 
   const user = new User({
@@ -29,4 +30,27 @@ export const registerUser = async (data) => {
   await user.save()
 
   return user
+}
+
+// Login
+export const loginUser = async (data) => {
+  const { password, email } = data
+  const user = await User.findOne({ email }) 
+  const passwordCompare = await bcrypt.compare(password, user.password)
+
+  // Login auth error
+  if (!user || !passwordCompare) {
+    return { message: 'Email or password is wrong' }
+  }
+
+  // Login success response
+  const payload = {
+    id: user._id,
+  }
+
+  const { TOKEN_KEY } = process.env
+
+  const token = jwt.sign(payload, TOKEN_KEY, { expiresIn: '2h' })
+  await User.findByIdAndUpdate(user._id, { token })
+  return { user, token }
 }
