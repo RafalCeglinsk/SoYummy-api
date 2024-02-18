@@ -10,7 +10,7 @@ import { logout } from '../../controllers/auth/logout.js'
 
 router.post('/register', register)
 router.post('/login', login)
-router.get('/current', current)
+router.get('/current', auth, current)
 router.post('/logout', auth, logout)
 
 export { router }

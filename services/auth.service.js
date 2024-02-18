@@ -15,7 +15,7 @@ export const registerUser = async (data) => {
 
   //find an existing user
   const checkUser = await User.findOne({ email })
-  
+
   if (checkUser) {
     return { error: `User already registered` }
   }
@@ -66,5 +66,15 @@ export const loginUser = async (data) => {
 // Logout
 export const logoutUser = async (id) => {
   await User.findByIdAndUpdate({ _id: id }, { token: null }, { new: true })
-  return;
-};
+  return
+}
+
+// user logged
+export const currentUser = async (id) => {
+  const user = await User.findById(id)
+
+  if (!user) {
+    return { error: 'Unauthorized' }
+  }
+  return {user}
+}
