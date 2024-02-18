@@ -1,23 +1,34 @@
 import { loginSchema } from '../../schemas/user.schema.js'
 import { loginUser } from '../../services/auth.service.js'
+import { ApiError } from '../../utils/errors/ApiError.js'
 
 export const login = async (req, res, next) => {
   // Login validation error
   const validationResult = loginSchema.validate(req.body)
   if (validationResult.error) {
     return res.status(400).json({
-      status: 400,
       ResponseBody: validationResult.error.details[0].message,
     })
   }
   try {
-    const { token, user } =  await loginUser(req.body)
+    const loggedUser = await loginUser(req.body)
+
+
+    // if user exists return error with status conflict
+    if (loggedUser.error) {
+      return next(ApiError.unauthorized(loggedUser.error))
+    }
+
+    const { name, email, subscription, avatarURL } = loggedUser?.user
+
     return res.status(200).json({
       RequestBody: {
-        token,
+        'Current token': loggedUser?.token,
         user: {
-          email: user.email,
-          subscription: user.subscription,
+          name: name,
+          email: email,
+          subscription: subscription,
+          avatar: avatarURL,
         },
       },
     })
