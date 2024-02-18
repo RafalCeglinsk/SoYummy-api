@@ -8,7 +8,7 @@ export const current = async (req, res, next) => {
     
     // Current user unauthorized error
     if (!loggedUser) {
-      return next(ApiError.unauthorized(user.error))
+      return next(ApiError.unauthorized(loggedUser.error))
     }
 
     const {email, subscription} = loggedUser.user
