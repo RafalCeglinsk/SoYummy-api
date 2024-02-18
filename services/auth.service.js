@@ -62,3 +62,9 @@ export const loginUser = async (data) => {
   await User.findByIdAndUpdate(user._id, { token })
   return { user, token }
 }
+
+// Logout
+export const logoutUser = async (id) => {
+  await User.findByIdAndUpdate({ _id: id }, { token: null }, { new: true })
+  return;
+};
