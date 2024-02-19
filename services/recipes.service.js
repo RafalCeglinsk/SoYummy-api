@@ -27,7 +27,7 @@ export const getRecipeId = async (recipeId) => {
             input: '$ingredients',
             in: {
               $mergeObjects: [
-                '$$this',
+                '$this',
                 {
                   $arrayElemAt: [
                     '$ingredients_details',
