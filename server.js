@@ -19,6 +19,19 @@ const runServer = async () => {
       Docs available at http://localhost:${PORT_SERVER}/api-docs
 
       API command list:
+      
+      Developer server: ===> http://localhost:${PORT_SERVER}/api
+
+      /auth
+         @POST /register - registration user {json (name, email, password)}
+         @POST /login - login user {json (email, password)}
+         @GET /current - current user {header Authorization: Bearer token}
+         @POST /logout - logout user {header Authorization: Bearer token}
+      /users
+         @PATCH /subscribe - update subscription user {json (email) + header Authorization: Bearer token}
+      /recipes
+         @GET /categories - category list sorted alphabetically {no parameters}
+         
       `
       )
     })
