@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 const recipeSchema = new Schema({
   title: {
@@ -60,7 +60,7 @@ const recipeSchema = new Schema({
   ingredients: [
     {
       id: {
-        type: mongoose.Types.ObjectId,
+        type: Types.ObjectId,
         ref: "ingredient",
       },
       measure: {
@@ -76,4 +76,4 @@ const recipeSchema = new Schema({
   },
 });
 
-export const recipe = model("recipe", recipeSchema);
+export const Recipe = model("recipe", recipeSchema);
