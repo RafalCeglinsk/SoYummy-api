@@ -43,7 +43,7 @@ export const getRecipeId = async (recipeId) => {
       },
     },
     {
-      //removes the top-level fields ingr_info and ingredients.id
+      //removes the top-level fields ingredients_details and ingredients.id
       $unset: ['ingredients_details', 'ingredients.id'],
     },
   ])
