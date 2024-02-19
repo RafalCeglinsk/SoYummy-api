@@ -30,6 +30,7 @@ const runServer = async () => {
       /users
          @PATCH /subscribe - update subscription user {json (email) + header Authorization: Bearer token}
       /recipes
+         @GET / - get one recipe by id {no parameters}
          @GET /categories - category list sorted alphabetically {no parameters}
          
       `

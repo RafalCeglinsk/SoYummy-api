@@ -1,13 +1,13 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from 'mongoose'
 
 const recipeSchema = new Schema({
   title: {
     type: String,
-    required: [true, "Set title"],
+    required: [true, 'Set title'],
   },
   category: {
     type: String,
-    required: [true, "Category is required"],
+    required: [true, 'Category is required'],
   },
   area: {
     type: String,
@@ -15,19 +15,15 @@ const recipeSchema = new Schema({
   },
   instructions: {
     type: String,
-    reguired: [true, "Provide an instructions"],
+    reguired: [true, 'Provide an instructions'],
   },
   description: {
     type: String,
-    require: [true, "Description is required"],
+    require: [true, 'Description is required'],
   },
   thumb: {
     type: String,
-    required: [true, "Set image"],
-  },
-  cloudinaryImageName: {
-    type: String,
-    default: null,
+    required: [true, 'Set image'],
   },
   preview: {
     type: String,
@@ -35,14 +31,15 @@ const recipeSchema = new Schema({
   },
   time: {
     type: String,
-    required: [true, "Set time"],
+    required: [true, 'Set time'],
   },
   popularity: {
     type: Number,
     default: null,
   },
   favorites: {
-    type: Array,
+    type: Types.ObjectId,
+    ref: 'user',
     default: null,
   },
   likes: {
@@ -57,23 +54,15 @@ const recipeSchema = new Schema({
     type: Array,
     default: null,
   },
-  ingredients: [
-    {
-      id: {
-        type: mongoose.Types.ObjectId,
-        ref: "ingredient",
-      },
-      measure: {
-        type: String,
-        required: [true, "Measure is required"],
-      },
-      _id: false,
-    },
-  ],
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
+  ingredients: {
+    type: Array,
+    required: true,
+    ref: 'ingredient',
   },
-});
+  owner: {
+    type: Types.ObjectId,
+    ref: 'user',
+  },
+})
 
-export const recipe = model("recipe", recipeSchema);
+export const Recipe = model('recipe', recipeSchema)
