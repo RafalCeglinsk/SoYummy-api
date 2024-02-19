@@ -55,7 +55,7 @@ export const loginSchema = Joi.object({
   password: Joi.string().min(3).required(),
 })
 
-export const addSubscribeSchema = Joi.object({
+export const subscribeSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required().messages({
     'string.pattern.base': 'Email format is: example@example.com',
   }),
