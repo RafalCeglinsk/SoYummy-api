@@ -2,6 +2,7 @@ import { ApiError } from '../../utils/errors/ApiError.js'
 import { subscribeSchema } from '../../schemas/user.schema.js'
 import { checkSubscriptionStatus } from '../../services/user.service.js'
 import { updateUserProfile } from '../../services/user.service.js'
+import { sendEmail } from '../../utils/nodemailer.js'
 
 export const subscribe = async (req, res, next) => {
   try {
@@ -31,10 +32,16 @@ export const subscribe = async (req, res, next) => {
         ApiError.conflict('You are already subscribed to the newsletter')
       )
     }
-    
+
     const updatedUser = await updateUserProfile(id, {
       subscription: email,
     })
+
+    const isEmailSend = await sendEmail(email)
+
+    if (!isEmailSend) {
+      return next(ApiError.internal())
+    }
 
     res.status(200).json({
       code: 200,
