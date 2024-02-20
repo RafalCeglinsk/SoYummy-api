@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose"
 
-const IndegredientsSchema = new Schema({
+const ingredientSchema = new Schema({
   ttl: {
     type: String,
     required: [true, 'Recipe title is required'],
@@ -19,4 +19,4 @@ const IndegredientsSchema = new Schema({
   },
 })
 
-export const IndegredientsModel = model("Indegredient", IndegredientsSchema)
+export const Ingredient = model("ingredient", ingredientSchema)
