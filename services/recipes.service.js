@@ -51,6 +51,22 @@ export const getRecipeId = async (recipeId) => {
   return recipe[0]
 }
 
+export const mainPage = async () => {
+  const limitRecipe = 4
+
+  const breakfast = await Recipe.find({ category: 'Breakfast' }).limit(
+    limitRecipe
+  )
+  const miscellaneous = await Recipe.find({
+    category: 'Miscellaneous',
+  }).limit(limitRecipe)
+
+  const chicken = await Recipe.find({ category: 'Chicken' }).limit(limitRecipe)
+  const dessert = await Recipe.find({ category: 'Dessert' }).limit(limitRecipe)
+
+  return { breakfast, miscellaneous, chicken, dessert }
+}
+
 export const getRecipesByCategoryName = async (categoryName, limit, page) => {
   const recipe = await Recipe.aggregate([
     {
