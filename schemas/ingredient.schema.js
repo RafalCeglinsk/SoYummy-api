@@ -19,4 +19,4 @@ const ingredientSchema = new Schema({
   },
 })
 
-export const Ingredient = model("ingredient", ingredientSchema)
+export const Ingredient = model("ingredients", ingredientSchema)
