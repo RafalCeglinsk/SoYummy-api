@@ -1,4 +1,7 @@
 import { Schema, Types, model } from 'mongoose'
+import Joi from 'joi'
+import objectId from 'joi-objectid'
+Joi.objectId = objectId(Joi)
 
 const recipeSchema = new Schema({
   title: {
@@ -37,11 +40,11 @@ const recipeSchema = new Schema({
     type: Number,
     default: null,
   },
-  favorites: {
+  favorites: [{
     type: Types.ObjectId,
     ref: 'user',
     default: null,
-  },
+  }],
   likes: {
     type: Array,
     default: null,
@@ -66,3 +69,7 @@ const recipeSchema = new Schema({
 })
 
 export const Recipe = model('recipe', recipeSchema)
+
+export const favoriteSchema = Joi.object({
+  recipeId: Joi.objectId().required(),
+})
