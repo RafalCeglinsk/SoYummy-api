@@ -10,7 +10,7 @@ import { router as usersRouter } from './routes/api/user.js'
 import { router as recipesRouter } from './routes/api/recipes.js'
 import { router as ingredientsRouter } from './routes/api/ingredients.js'
 import { router as shoppingListRouter } from './routes/api/shoppingList.js'
-
+import { router as favoriteRouter } from './routes/api/favorite.js'
 const app = express()
 swagger(app)
 
@@ -26,6 +26,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/recipes', recipesRouter)
 app.use('/api/ingredients', ingredientsRouter)
 app.use('/api/shopping-lists', shoppingListRouter)
+app.use('/api/favorites', favoriteRouter)
 
 app.use(apiErrorHandler)
 
