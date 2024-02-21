@@ -16,7 +16,43 @@ export const addIngredients = async (user, data) => {
   return result
 }
 
-export const removeIngredients = async () => {}
+export const removeIngredients = async (
+  user_id,
+  user,
+  ingredientId,
+  measure
+) => {
+
+  const index = user.shoppingList.findIndex((item) => {
+    return (
+      String(item.ingredientId) === String(ingredientId) &&
+      item.measure === measure
+    )
+  })
+
+  if (index === -1) {
+    return index
+  }
+
+  const deletedId = user.shoppingList.splice(index, 1)
+
+  const result = await User.findByIdAndUpdate(
+    user_id,
+    {
+      shoppingList: user.shoppingList,
+      // $pull: {
+      //   shoppingList: ingredientId,
+      // },
+    },
+    { new: true }
+  )
+    .select('shoppingList')
+    .populate({
+      path: 'shoppingList.ingredientId',
+      ref: 'ingredients',
+    })
+  return
+}
 
 export const displayIngredients = async (_id) => {
   // display only array shoppingList
