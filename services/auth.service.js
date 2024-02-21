@@ -58,7 +58,7 @@ export const loginUser = async (data) => {
 
   const { TOKEN_KEY } = process.env
 
-  const token = jwt.sign(payload, TOKEN_KEY, { expiresIn: '2h' })
+  const token = jwt.sign(payload, TOKEN_KEY, { expiresIn: '7d' })
   await User.findByIdAndUpdate(user._id, { token })
   return { user, token }
 }

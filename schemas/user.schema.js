@@ -1,5 +1,7 @@
-import { Schema, model } from 'mongoose'
+import { Schema, Types, model } from 'mongoose'
 import Joi from 'joi'
+import objectId from 'joi-objectid'
+Joi.objectId = objectId(Joi)
 
 const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ // example@example.com
 
@@ -36,6 +38,29 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Verify token is required'],
   },
+  shoppingList: {
+    _id: false,
+    type: [
+      {
+        ingredientId: {
+          type: Types.ObjectId,
+          ref: 'ingredients',
+          required: [true, 'Ingredient is required'],
+        },
+        recipeId: {
+          type: Types.ObjectId,
+          ref: 'recipes',
+          required: [true, 'Recipe id is required'],
+        },
+        measure: {
+          type: String,
+          default: '',
+          required: [true, 'Measure is required'],
+        },
+      },
+    ],
+    default: [],
+  },
 })
 
 export const User = model('user', userSchema)
@@ -59,4 +84,10 @@ export const subscribeSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required().messages({
     'string.pattern.base': 'Email format is: example@example.com',
   }),
+})
+
+export const shoppingListSchema = Joi.object({
+  ingredientId: Joi.objectId().required(),
+  recipeId: Joi.objectId().required(),
+  measure: Joi.string().required(),
 })
