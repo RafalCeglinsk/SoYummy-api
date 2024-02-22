@@ -49,7 +49,7 @@ const userSchema = new Schema({
         },
         recipeId: {
           type: Types.ObjectId,
-          ref: 'recipes',
+          ref: 'recipe',
           required: [true, 'Recipe id is required'],
         },
         measure: {
@@ -61,6 +61,7 @@ const userSchema = new Schema({
     ],
     default: [],
   },
+  favorites: [{ type: Types.ObjectId, ref: 'recipe' }],
 })
 
 export const User = model('user', userSchema)
