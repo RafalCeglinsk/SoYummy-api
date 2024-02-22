@@ -27,12 +27,12 @@ export const getRecipeId = async (recipeId) => {
             input: '$ingredients',
             in: {
               $mergeObjects: [
-                '$this',
+                '$$this',
                 {
                   $arrayElemAt: [
                     '$ingredients_details',
                     {
-                      $indexOfArray: ['$ingredients_details._id', '$this.id'],
+                      $indexOfArray: ['$ingredients_details._id', '$$this.id'],
                     },
                   ],
                 },
