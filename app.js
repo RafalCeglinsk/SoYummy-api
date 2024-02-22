@@ -12,6 +12,8 @@ import { router as ingredientsRouter } from './routes/api/ingredients.js'
 import { router as shoppingListRouter } from './routes/api/shoppingList.js'
 import { router as favoriteRouter } from './routes/api/favorite.js'
 import { router as popularRouter } from './routes/api/popularRecipes.js'
+import { router as ownRecipesRouter } from './routes/api/ownRecipes.js'
+
 const app = express()
 swagger(app)
 
@@ -29,7 +31,7 @@ app.use('/api/recipes', recipesRouter)
 app.use('/api/ingredients', ingredientsRouter)
 app.use('/api/shopping-lists', shoppingListRouter)
 app.use('/api/favorites', favoriteRouter)
-
+app.use('/api/ownRecipes', ownRecipesRouter)
 
 app.use(apiErrorHandler)
 
