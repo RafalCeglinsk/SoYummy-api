@@ -12,8 +12,6 @@ import { addRecipe } from '../../controllers/ownRecipes/addRecipe.js'
 import { getRecipes } from '../../controllers/ownRecipes/getRecipes.js'
 import { removeRecipe } from '../../controllers/ownRecipes/removeRecipe.js'
 
-import { popularRecipes } from '../../controllers/popularRecipes/popularRecipes.js'
-
 import { search } from '../../controllers/search/search.js'
 
 router.get('/', getAllRecipes)
@@ -26,7 +24,5 @@ router.get('/:recipeId', getRecipeById)
 router.get('/own', getRecipes)
 router.post('/own', addRecipe)
 router.delete('/own/:recipeId', removeRecipe)
-
-router.get('/popular', popularRecipes)
 
 export { router }
