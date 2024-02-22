@@ -20,3 +20,18 @@ export const addRecipeFavorite = async (recipeId, userId) => {
 
   return recipe
 }
+
+export const getRecipeFavorite = async (userId) => {
+  
+  const recipes = await Recipe.aggregate([
+    {
+      $match: {
+        favorites: {
+          $in: [userId],
+        },
+      },
+    },
+  ])
+
+  return recipes
+}
