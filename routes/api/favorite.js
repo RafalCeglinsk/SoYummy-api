@@ -8,6 +8,6 @@ const router = express.Router()
 
 router.post('/', auth, addToFavorite)
 router.get('/', auth, getFavorite)
-router.delete('/', auth, removeFromFavorite)
+router.delete('/:recipeId', auth, removeFromFavorite)
 
 export { router }
