@@ -1,13 +1,19 @@
-import { getPopularRecipes } from "../../services/popularRecipes.service.js";
+import { getPopularRecipes } from '../../services/popularRecipes.service.js'
 
 export const popularRecipes = async (req, res, next) => {
-  let { page = 1, limit = 10 } = req.query;
-  limit = +limit > 50 ? 50 : +limit;
-  console.log(req.query);
-  const recipes = await getPopularRecipes(page, limit);
-  console.log(recipes);
-  res.json({
-    code: 200,
-    ...recipes,
-  });
-};
+  try {
+
+    let { page = 1, limit = 10 } = req.query
+    limit = +limit > 50 ? 50 : +limit
+    
+    const recipes = await getPopularRecipes(page, limit)
+
+    return res.status(200).json({
+      code: 200,
+      status: `OK`,
+      recipes,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
