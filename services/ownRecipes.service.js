@@ -6,6 +6,14 @@ export const createRecipe = async (data) => {
 }
 
 export const showRecipes = async (_id) => {
-    const result = await Recipe.find({owner: _id})
-    return result 
+  const result = await Recipe.find({ owner: _id })
+  return result
+}
+
+export const deleteRecipe = async (recipeID, _id) => {
+  const result = await Recipe.findByIdAndDelete({
+    _id: recipeID,
+    owner: _id,
+  })
+  return result
 }
