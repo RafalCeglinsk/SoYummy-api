@@ -23,17 +23,36 @@ const runServer = async () => {
       Developer server: ===> http://localhost:${PORT_SERVER}/api
 
       /auth
-         @POST /register - registration user {json (name, email, password)}
-         @POST /login - login user {json (email, password)}
-         @GET /current - current user {header Authorization: Bearer token}
-         @POST /logout - logout user {header Authorization: Bearer token}
+         @POST /register - registration user
+         @POST /login - login user 
+         @GET /current - current user (requirement: auth token bearer)
+         @POST /logout - logout user (requirement: auth token bearer)
       /users
-         @PATCH /subscribe - update subscription user {json (email) + header Authorization: Bearer token}
+         @PATCH /subscribe - update subscription user (requirement: auth token bearer)
       /recipes
-         @GET / - get one recipe by id {no parameters}
-         @GET /categories - category list sorted alphabetically {no parameters}
-         
-      `
+         @GET /:recipeID - get one recipe by id 
+         @GET /categories - category list sorted alphabetically
+         @GET /:category - show 8 recipes from choose category
+         @GET /main-page - show 4 recipes per category 
+         @GET /search/?title=name - find recipe by title
+      /ingredients
+         @GET /list - get all ingredients
+         @GET /?ingredients=Lamb find ingredients by name (requirement: auth token bearer)
+      /favorites
+         @POST / - add recipe to favorites list user (requirement: auth token bearer)
+         @GET / - get all recipes from favorites list (requirement: auth token bearer)
+         @DEL /:recipeID - remove recipe from favorites list  (requirement: auth token bearer)
+      /popular
+         @GET / - get all popular recipes 
+      /shopping-lists
+         @POST / - add ingredients to shopping-lists (requirement: auth token bearer)
+         @GET / - get all ingredients from shopping-lists (requirement: auth token bearer)
+         @DEL /ingredientId - remove ingrendient from shopping list (requirement: auth token bearer)
+      /ownRecipes
+         @POST / - add own recipe to database (requirement: auth token bearer)
+         @GET / - get all own recipes (requirement: auth token bearer)
+         @DEL /:recipe_id - remove own recipe 
+`
       )
     })
   } catch (err) {
