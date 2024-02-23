@@ -14,14 +14,27 @@ export const addRecipe = async (req, res, next) => {
     const { title, category, instructions, description, time, ingredients } =
       req.body
 
+    let parsedIngredients = null
+
+    if (Array.isArray(ingredients)) {
+      // This is an array of objects, so there is no need to parse
+      parsedIngredients = ingredients
+    } else {
+      // This is not an array of objects, so parse it as a JSON string
+      parsedIngredients = JSON.parse(ingredients)
+    }
+
     const objData = {
-      preview,
-      thumb,
+      preview : null,
+      thumb : null,
       title,
       category,
       description,
       time,
-      ingredients,
+      ingredients: parsedIngredients.map((ingredient) => ({
+        id: new Types.ObjectId(ingredient.id),
+        measure: ingredient.measure,
+      })),
       instructions,
       owner: new Types.ObjectId(_id),
     }
@@ -33,7 +46,6 @@ export const addRecipe = async (req, res, next) => {
       status: `CREATED`,
       recipe,
     })
-
   } catch (error) {
     next(error)
   }
