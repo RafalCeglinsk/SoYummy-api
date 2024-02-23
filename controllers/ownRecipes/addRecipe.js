@@ -2,7 +2,7 @@ import { ApiError } from '../../utils/errors/ApiError.js'
 import { ownRecipesSchema } from '../../schemas/recipe.schema.js'
 import { createRecipe } from '../../services/ownRecipes.service.js'
 import { Types } from 'mongoose'
-
+import { uploadRecipeImage } from '../../utils/cloudinary.js'
 export const addRecipe = async (req, res, next) => {
   const validationResult = ownRecipesSchema.validate(req.body)
   if (validationResult.error) {
@@ -13,7 +13,22 @@ export const addRecipe = async (req, res, next) => {
     const { _id } = req.user
     const { title, category, instructions, description, time, ingredients } =
       req.body
+    let recipeImg = null
 
+    console.log(req.file)
+    console.log(req.file?.path)
+
+    if (!req.file) {
+      // set default image no preview
+      recipeImg =
+        'https://res.cloudinary.com/dyomlbrcf/image/upload/v1708692584/yummy-api/recipes/linjixv3vn290nvjmf2v.png'
+    } else {
+      recipeImg = await uploadRecipeImage(req.file.path)
+      return recipeImg.url
+    }
+
+    console.log(recipeImg)
+    console.log(recipeImg.url)
     let parsedIngredients = null
 
     if (Array.isArray(ingredients)) {
@@ -25,8 +40,8 @@ export const addRecipe = async (req, res, next) => {
     }
 
     const objData = {
-      preview : null,
-      thumb : null,
+      preview: recipeImg,
+      thumb: recipeImg,
       title,
       category,
       description,
