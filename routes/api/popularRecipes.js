@@ -1,8 +1,8 @@
-import express from "express";
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import { popularRecipes } from "../../controllers/popularRecipes/popularRecipes.js";
+import { popularRecipes } from '../../controllers/popularRecipes/popularRecipes.js'
 
-router.get("/", popularRecipes);
+router.get('/', popularRecipes)
 
-export { router };
+export { router }
