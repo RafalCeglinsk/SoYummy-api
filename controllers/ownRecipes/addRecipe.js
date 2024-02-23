@@ -6,7 +6,7 @@ import { Types } from 'mongoose'
 export const addRecipe = async (req, res, next) => {
   const validationResult = ownRecipesSchema.validate(req.body)
   if (validationResult.error) {
-    return next(ApiError.conflict(validationResult.error.details[0].message))
+    return next(ApiError.badRequest(validationResult.error.details[0].message))
   }
 
   try {
