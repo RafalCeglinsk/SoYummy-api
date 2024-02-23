@@ -26,7 +26,7 @@ const recipeSchema = new Schema({
   },
   thumb: {
     type: String,
-    required: [true, 'Set image'],
+    default: null,
   },
   preview: {
     type: String,
@@ -40,11 +40,13 @@ const recipeSchema = new Schema({
     type: Number,
     default: null,
   },
-  favorites: [{
-    type: Types.ObjectId,
-    ref: 'user',
-    default: null,
-  }],
+  favorites: [
+    {
+      type: Types.ObjectId,
+      ref: 'user',
+      default: null,
+    },
+  ],
   likes: {
     type: Array,
     default: null,
@@ -72,4 +74,15 @@ export const Recipe = model('recipe', recipeSchema)
 
 export const favoriteSchema = Joi.object({
   recipeId: Joi.objectId().required(),
+})
+
+export const ownRecipesSchema = Joi.object({
+  preview: Joi.string(),
+  thumb: Joi.string(),
+  title: Joi.string().required(),
+  category: Joi.string().required(),
+  description: Joi.string().required(),
+  time: Joi.string().required(),
+  ingredients: Joi.array().required(),
+  instructions: Joi.string().required(),
 })
