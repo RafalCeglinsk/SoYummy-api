@@ -3,7 +3,6 @@ import { ownRecipesSchema } from '../../schemas/recipe.schema.js'
 import { createRecipe } from '../../services/ownRecipes.service.js'
 import { Types } from 'mongoose'
 import { uploadRecipeImage } from '../../utils/cloudinary.js'
-import Datauri from 'datauri'
 import path from 'path'
 
 export const addRecipe = async (req, res, next) => {
