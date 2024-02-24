@@ -13,19 +13,8 @@ export const addRecipe = async (req, res, next) => {
 
   try {
     const { _id } = req.user
-    const { title, category, instructions, description, time } = req.body
+    const { title, category, instructions, description, time, ingredients } = req.body
     let recipeImg = null
-
-    const ingredients = [
-      {
-        id: '640c2dd963a319ea671e3773', //id produktu z tabeli ingredients
-        measure: '500g',
-      },
-      {
-        id: '640c2dd963a319ea671e3735', //id produktu z tabeli ingredients
-        measure: '1/2 cup',
-      },
-    ]
 
     console.log(JSON.stringify(req.body))
     console.log('req.file.mimetype:' + req.file.mimetype)
