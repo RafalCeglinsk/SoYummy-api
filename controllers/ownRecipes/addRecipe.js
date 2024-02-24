@@ -15,20 +15,14 @@ export const addRecipe = async (req, res, next) => {
       req.body
     let recipeImg = null
 
-    console.log(req.file)
-    console.log(req.file?.path)
-
     if (!req.file) {
       // set default image no preview
       recipeImg =
         'https://res.cloudinary.com/dyomlbrcf/image/upload/v1708692584/yummy-api/recipes/linjixv3vn290nvjmf2v.png'
     } else {
       recipeImg = await uploadRecipeImage(req.file.path)
-      return recipeImg.url
     }
 
-    console.log(recipeImg)
-    console.log(recipeImg.url)
     let parsedIngredients = null
 
     if (Array.isArray(ingredients)) {
@@ -38,10 +32,10 @@ export const addRecipe = async (req, res, next) => {
       // This is not an array of objects, so parse it as a JSON string
       parsedIngredients = JSON.parse(ingredients)
     }
-
+    
     const objData = {
-      preview: recipeImg,
-      thumb: recipeImg,
+      preview: recipeImg.hasOwnProperty('url') ? recipeImg.url : recipeImg,
+      thumb: recipeImg.hasOwnProperty('url') ? recipeImg.url : recipeImg,
       title,
       category,
       description,
