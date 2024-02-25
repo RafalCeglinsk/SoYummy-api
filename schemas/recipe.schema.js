@@ -86,3 +86,34 @@ export const ownRecipesSchema = Joi.object({
   ingredients: Joi.array().required(),
   instructions: Joi.string().required(),
 })
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Popular:
+ *       type: object
+ *       required:
+ *         - title
+ *         - instructions
+ *       properties:
+ *         title:
+ *           type: string
+ *           example: Spaghetti Bolognese
+ *         category:
+ *           type: string
+ *           example: Beef
+ *         instructions:
+ *           type: array
+ *         description:
+ *             type: string
+ *         thumb:
+ *            type: string
+ *            example: https://www.themealdb.com/images/media/meals/sutysw1468247559.jpg
+ *         favorites:
+ *             type: array
+ *             items:
+ *               $ref: "#/components/schemas/userRegisterResponse"
+ *             example: [{"user1"}, {"user2"}]
+ *
+ */
