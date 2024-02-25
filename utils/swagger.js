@@ -25,7 +25,7 @@ const options = {
       },
     ],
   },
-  apis: ['./routes/api/*.js'],
+  apis: ['./routes/api/*.js','./schemas/*.js'],
 }
 
 // swagger-jsdoc -> returns validated swagger spec in json format

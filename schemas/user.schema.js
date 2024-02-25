@@ -92,3 +92,98 @@ export const shoppingListSchema = Joi.object({
   recipeId: Joi.objectId().required(),
   measure: Joi.string().required(),
 })
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *   userRegister:
+ *     type: object
+ *     required:
+ *             - name
+ *             - email
+ *             - password
+ *     properties:
+ *         name:
+ *           type: string
+ *           description: Name of new user
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: Email of new user, must be unique through database
+ *         password:
+ *           type: string
+ *           format: password
+ *           description: User password
+ *   userRegisterResponse:
+ *     type: object
+ *     properties:
+ *         _id:
+ *           type: string
+ *           description: The auto-genereted by database unique id
+ *         name:
+ *           type: string
+ *           description: Name of new user
+ *         email:
+ *           type: string
+ *           description: Email of new user, must be unique through database
+ *         password:
+ *           type: string
+ *           format: password
+ *           description: User password
+ *         subscription: 
+ *           type: string,
+ *           nullable: true,
+ *           description: User email subscription,
+ *           format: email,
+ *         token:
+ *           type: string
+ *           description: JSON token                            
+ *         avatarURL:
+ *           type: string
+ *           description: Url to user avatar
+ *         verificationToken:
+ *           type: string
+ *           description: Defines wether the user confirmed email
+ *         favorites:
+ *           type: array
+ *           items: {}
+ *           description: Array of favorite recipes
+ *         shoppingList:
+ *           type: array
+ *           items: {}
+ *           description: Array of users shopping list
+ * 
+ *   userLogin:
+ *     type: object
+ *     required:
+ *             - email
+ *             - password
+ *     properties:
+ *         email:
+ *           type: string
+ *           description: Email of new user, must be unique through database
+ *         password:
+ *           type: string
+ *           format: password
+ *           description: User password
+ *
+ *   userLoginResponse:
+ *     type: object
+ *     properties:
+ *         currentToken:
+ *           type: string
+ *           description: JWT token
+ *         name:
+ *           type: string
+ *           description: User name
+ *         email:
+ *           type: string
+ *           description: User email
+ *         subscription:
+ *           type: string
+ *           description: User email subscription 
+ *         avatar:
+ *           type: string
+ *           description: User avatar
+ */
