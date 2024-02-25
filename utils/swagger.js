@@ -5,10 +5,10 @@ const options = {
   definition: {
     openapi: '3.1.0',
     info: {
-      title: 'REST API Docs',
-      version: '0.1.0',
+      title: 'So-Yummy Recipes app',
+      version: '1.0.0',
       description:
-        'This is a simple CRUD API application made with Express and documented with Swagger',
+        'So-yummy-api serves as the backbone for the So-yummy App, a platform dedicated to cooking aficionados and recipe management. It offers essential server-side functionalities to empower the frontend application.',
       license: {
         name: 'MIT',
         url: 'https://spdx.org/licenses/MIT.html',
@@ -18,6 +18,20 @@ const options = {
         email: '',
       },
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
     servers: [
       {
         url: 'http://localhost:5000',
@@ -25,7 +39,7 @@ const options = {
       },
     ],
   },
-  apis: ['./routes/api/*.js','./schemas/*.js'],
+  apis: ['./routes/api/*.js', './schemas/*.js'],
 }
 
 // swagger-jsdoc -> returns validated swagger spec in json format
