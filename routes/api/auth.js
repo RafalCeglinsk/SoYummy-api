@@ -97,11 +97,8 @@ router.post('/login', login)
  *  get:
  *   summary: Returns information about the logged in user
  *   tags: [auth]
- *   parameters:
- *      - name: authorization
- *        in: header
- *        security:
- *          - bearerAuth: []
+ *   security:
+ *     - bearerAuth: []
  *   responses:
  *     200:
  *       description: Logged in user data
@@ -128,12 +125,9 @@ router.get('/current', auth, current)
  *  post:
  *   summary: Log out user, destroy JWT
  *   tags: [auth]
- *   parameters:
- *      - name: authorization
- *        in: header
- *        security:
- *          - bearerAuth: []
- *        description: User token
+ *   security:
+ *     - bearerAuth: []
+ *       description: User token
  *   responses:
  *     204:
  *       description: User is logged out, JWT token destroyed

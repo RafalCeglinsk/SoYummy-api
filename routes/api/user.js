@@ -14,16 +14,13 @@ const router = express.Router()
 
 /**
  * @openapi
- * /:
+ * user/subscribe:
  *  post:
  *    summary: Add your email and subscribe
  *    tags: [Subscribe]
- *    parameters:
- *       - name: authorization
- *         in: header
- *         security:
- *           - bearerAuth: []
- *         description: User token
+ *    security:
+ *      - bearerAuth: []
+ *        description: User token
  *    requestBody:
  *      required: true
  *      content:
