@@ -93,7 +93,7 @@ router.post('/login', login)
 
 /**
  * @openapi
- * /auth:
+ * /auth/current:
  *  get:
  *   summary: Returns information about the logged in user
  *   tags: [auth]

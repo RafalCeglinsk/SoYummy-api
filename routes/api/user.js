@@ -14,7 +14,7 @@ const router = express.Router()
 
 /**
  * @openapi
- * user/subscribe:
+ * /users/subscribe:
  *  post:
  *    summary: Add your email and subscribe
  *    tags: [Subscribe]
