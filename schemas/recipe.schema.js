@@ -86,3 +86,111 @@ export const ownRecipesSchema = Joi.object({
   ingredients: Joi.array().required(),
   instructions: Joi.string().required(),
 })
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Popular:
+ *       type: object
+ *       required:
+ *         - title
+ *         - instructions
+ *       properties:
+ *         title:
+ *           type: string
+ *           example: Spaghetti Bolognese
+ *         category:
+ *           type: string
+ *           example: Beef
+ *         instructions:
+ *           type: array
+ *         description:
+ *             type: string
+ *         thumb:
+ *            type: string
+ *         favorites:
+ *             type: array
+ *             items:
+ *               $ref: "#/components/schemas/userRegisterResponse"
+ *             example: [{"user1"}, {"user2"}]
+ *     Recipe:
+ *       type: object
+ *       required:
+ *         - title
+ *         - instructions
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: 640cd5ac2d9fecf12e8898b1
+ *         title:
+ *           type: string
+ *           example: Home-made Mandazi
+ *         category:
+ *           type: string
+ *           example: Breakfast
+ *         area:
+ *           type: string
+ *           example: Kenyan
+ *         instructions:
+ *           type: array
+ *           items:
+ *             type: string
+ *         description:
+ *           type: string
+ *         thumb:
+ *           type: string
+ *         preview:
+ *           type: string
+ *         time:
+ *           type: string
+ *           example: 55
+ *         favorites: 
+ *           type: array
+ *           items:
+ *             $ref: "#/components/schemas/userRegisterResponse"
+ *           example: [{"user1"}, {"user2"}]
+ *         youtube:
+ *           type: string
+ *           example: https://www.youtube.com/watch?v=e52IL8zYmaE
+ *         tags:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["Breakfast", "Baking"]
+ *         ingredients:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Ingredient'
+ *
+ *     Ingredient:
+ *       required:
+ *         - name
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           example: Chicken
+ *         desc:
+ *           type: string
+ *         img:
+ *           type: string
+ *     Category:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: 640cd5ac2d9fecf12e8898b1
+ *         title:
+ *           type: string
+ *           example: Home-made Mandazi
+ *         category:
+ *           type: string
+ *           example: Breakfast
+ *         description:
+ *           type: string
+ *         thumb:
+ *           type: string
+ *         preview:
+ *           type: string
+ */
