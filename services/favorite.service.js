@@ -1,12 +1,12 @@
-import { Recipe } from '../schemas/recipe.schema.js'
+import { Recipe } from "../schemas/recipe.schema.js";
 
 export const isRecipeInFavorite = async (recipeId, userId) => {
   const result = await Recipe.findOne({
     _id: recipeId,
     favorites: { $in: [userId] },
-  })
-  return result
-}
+  });
+  return result;
+};
 
 export const addRecipeFavorite = async (recipeId, userId) => {
   const recipe = Recipe.findByIdAndUpdate(
@@ -15,11 +15,12 @@ export const addRecipeFavorite = async (recipeId, userId) => {
       $addToSet: { favorites: userId },
     },
     { new: true }
-  )
-  return recipe
-}
+  );
+  return recipe;
+};
 
-export const getRecipeFavorite = async (userId) => {
+export const getRecipeFavorite = async (userId, limit = 4, page = 1) => {
+  const skip = (Number(page) - 1) * Number(limit);
   const recipes = await Recipe.aggregate([
     {
       $match: {
@@ -28,9 +29,11 @@ export const getRecipeFavorite = async (userId) => {
         },
       },
     },
-  ])
-  return recipes
-}
+    { $skip: skip },
+    { $limit: Number(limit) },
+  ]);
+  return recipes;
+};
 
 export const removeRecipeFavorite = async (recipeId, userId) => {
   const result = await Recipe.findByIdAndUpdate(
@@ -39,6 +42,6 @@ export const removeRecipeFavorite = async (recipeId, userId) => {
       $pull: { favorites: userId },
     },
     { new: true }
-  )
-  return result
-}
+  );
+  return result;
+};

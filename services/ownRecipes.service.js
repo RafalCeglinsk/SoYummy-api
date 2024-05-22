@@ -5,7 +5,7 @@ export const createRecipe = async (data) => {
   return recipe;
 };
 
-export const showRecipes = async (_id, limit = 10, page = 1) => {
+export const showRecipes = async (_id, limit = 4, page = 1) => {
   const skip = (page - 1) * limit;
   const result = await Recipe.find({ owner: _id }).limit(limit).skip(skip);
   return result;
